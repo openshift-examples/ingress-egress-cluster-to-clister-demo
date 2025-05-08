@@ -1,0 +1,45 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: curller
+  labels:
+    app: curller
+    app.openshift.io/runtime: redhat
+    app.kubernetes.io/part-of: curller
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: curller
+  template:
+    metadata:
+      labels:
+        app: curller
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: curl
+          env:
+          - name: NODE_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: spec.nodeName
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          image: quay.io/openshift-examples/simple-http-server:latest
+          command:
+            - "/bin/sh"
+            - "-c"
+            - |
+
+                while true; do
+                  curl -s  http://simple-nginx-rbohne-demo.apps.isar.coe.muc.redhat.com/$POD_NAME/$NODE_NAME
+                  sleep 5;
+                done;

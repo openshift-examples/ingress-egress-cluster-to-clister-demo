@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    openshift.io/description: "Workload of tenant alpha"
+    openshift.io/display-name: "Workload of tenant alpha"
+  labels:
+    pub.openshift.examples/tenant: alpha
+  name: placeholder
+spec: {}

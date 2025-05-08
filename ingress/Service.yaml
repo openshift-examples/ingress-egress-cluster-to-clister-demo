@@ -1,0 +1,26 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: router-external-alpha
+  namespace: openshift-ingress
+  annotations:
+    metallb.universe.tf/address-pool: alpha
+    # metallb.universe.tf/loadBalancerIPs: 192.168.1.100
+spec:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: http
+    - name: https
+      port: 443
+      protocol: TCP
+      targetPort: https
+    - name: metrics
+      port: 1936
+      protocol: TCP
+      targetPort: metrics
+  selector:
+    ingresscontroller.operator.openshift.io/deployment-ingresscontroller: alpha
+  type: LoadBalancer

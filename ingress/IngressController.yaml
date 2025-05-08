@@ -1,0 +1,12 @@
+apiVersion: operator.openshift.io/v1
+kind: IngressController
+metadata:
+  name: alpha
+  namespace: openshift-ingress-operator
+spec:
+  domain: alpha.coe.muc.redhat.com
+  endpointPublishingStrategy:
+    type: Private
+  namespaceSelector:
+    matchLabels:
+      pub.openshift.examples/tenant: alpha
