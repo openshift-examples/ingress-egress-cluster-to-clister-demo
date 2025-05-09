@@ -6,25 +6,25 @@
 
 * Label nods with label `k8s.ovn.org/egress-assignable=`
   ```
-  oc label node -l node-role.kubernetes.io/worker \
+  oc label node -l node-role.kubernetes.io/worker 
     k8s.ovn.org/egress-assignable=
   ```
 * Install and start MetalLB via OperatorHub
-	Apply generic L2
-	```
-	oc apply -f - <<EOF
-	apiVersion: metallb.io/v1beta1
-	kind: L2Advertisement
-	metadata:
-		name: l2advertisement
-		namespace: metallb-system
-	spec:
-		ipAddressPoolSelectors:
-			- matchExpressions:
-					- key: pub.openshift.examples/tenant
-						operator: Exists
-	EOF
-	```
+  Apply generic L2
+  ```
+  oc apply -f - <<EOF
+  apiVersion: metallb.io/v1beta1
+  kind: L2Advertisement
+  metadata:
+    name: l2advertisement
+    namespace: metallb-system
+  spec:
+    ipAddressPoolSelectors:
+      - matchExpressions:
+          - key: pub.openshift.examples/tenant
+            operator: Exists
+  EOF
+  ```
 
 ## Cluster ocp1
 
