@@ -1,5 +1,7 @@
 # Cluster-to-Cluster Ingress and Egress Migration
 
+![Image](overview.drawio.png)
+
 ## Prepare both clusters
 
 * Label nods with label `k8s.ovn.org/egress-assignable=`
